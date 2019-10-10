@@ -35,7 +35,7 @@ const list = function (argv){
         }
     }
     if(!argv.search && !argv.npage){
-            let URL = `https://rickandmortyapi.com/api/character/?status=${algv.status}`;
+            let URL = `https://rickandmortyapi.com/api/character/?status=${argv.status}`;
             recur(URL);
     }
     if(argv.search){

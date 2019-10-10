@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import {list} from './utils';
+import {list,view} from './utils';
 
 yargs.command({
     command:'list',
@@ -24,22 +24,17 @@ yargs.command({
     handler: list,
 })
 
-// yargs.command({
-//     command:'view',
-//     describe:'Data of a particular character',
-//     builder:{
-//         name:{
-//             describe:'specific name of character',
-//             demandOption:true,
-//             type:'string',
-//         },
-        //id:{
-    //             describe:'id',
-    //             demandOption:false,
-    //             type:'number',
-    //         },
-//     },
-//     handler: search,
-// })
+yargs.command({
+    command:'view',
+    describe:'Data of a particular character',
+    builder:{
+        id:{
+                describe:'id',
+                demandOption:true,
+                type:'number',
+            },
+    },
+    handler: view,
+})
 
 yargs.parse();

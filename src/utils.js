@@ -1,15 +1,20 @@
 import request from 'request';
+import chalk from 'chalk';
 
 const recur = function recur (url, name){ 
     request({ url: url, json: true }, (error, response) => {
+        if(response.body.error){console.log(chalk.red(`What you are searching doesnt exist.`))}
+        else{
             response.body.results.forEach( (loc, i) => {
                 console.log(`   ${i}: ${loc.name}`);
-                if(name){console.log(`       ID: ${loc.id}`);}
+                if(name){console.log(chalk.yellow(`       ID: ${loc.id}`));}
             }) 
             if(response.body.info.next !== ""){
                 if(name){recur(response.body.info.next,name);}
                 else{recur(response.body.info.next);}
-            }  
+            }
+        }
+              
     });
 }
 
@@ -35,7 +40,7 @@ const list = function (argv){
             let URL = `https://rickandmortyapi.com/api/character/?status=${argv.status}`;
             recur(URL);
     }
-    if(!argv.status && argv.napage && argv.search){
+    if(!argv.status && !argv.napage && argv.search){
         let URL = `https://rickandmortyapi.com/api/character/?name=${argv.search}`;
         recur(URL,argv.search);
     }
@@ -44,10 +49,7 @@ const list = function (argv){
 const view = function view(argv){
         let URL = `https://rickandmortyapi.com/api/character/${argv.id}`;
         request({ url: URL, json: true }, (error, response) => {
-            console.log(response.body.name);
-            console.log(response.body.status);
-            console.log(response.body.species);
-            console.log(response.body.origin.name);   
+            console.log(`${chalk.yellow(`Name: `)}${response.body.name}\n${chalk.yellow(`Status: `)}${response.body.status}\n${chalk.yellow(`Specie: `)}${response.body.species}\n${chalk.yellow(`Origin: `)}${response.body.origin.name}`);
         });
     }
     

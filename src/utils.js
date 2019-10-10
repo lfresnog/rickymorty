@@ -49,7 +49,7 @@ const list = function (argv){
 const view = function view(argv){
         let URL = `https://rickandmortyapi.com/api/character/${argv.id}`;
         request({ url: URL, json: true }, (error, response) => {
-            console.log(`${chalk.yellow(`Name: `)}${response.body.name}\n${chalk.yellow(`Status: `)}${response.body.status}\n${chalk.yellow(`Specie: `)}${response.body.species}\n${chalk.yellow(`Origin: `)}${response.body.origin.name}`);
+            console.log(`${chalk.yellow(`Name: `)}${response.body.name}\n${chalk.yellow(`Status: `)}${response.body.status}\n${chalk.yellow(`Specie: `)}${response.body.species}\n${chalk.yellow(`Origin: `)}${response.body.origin.name}\n${chalk.yellow(`Location: `)}${response.body.location.name}`);
         });
     }
     

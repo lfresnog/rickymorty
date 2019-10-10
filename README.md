@@ -15,11 +15,11 @@ Programme created trough the API of Rick & Morty.
 
  `npm start -- list --npage=2`
 
- **Check character alive or dead**
+ **Check character is alive or dead**
  
  `npm start -- list --status="alive"`
 
- `npm start -- list --npage="dead"`
+ `npm start -- list --status="dead"`
 
   **Search characters with that name and check the ID of each one**
 

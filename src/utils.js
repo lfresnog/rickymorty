@@ -9,8 +9,8 @@ const recur = function recur (url, name){
                 console.log(`   ${i}: ${loc.name}`);
                 if(name){console.log(chalk.yellow(`       ID: ${loc.id}`));}
             }) 
-            if(response.body.info.next !== ""){
-                if(name){recur(response.body.info.next,name);}
+        if(response.body.info.next !== ""){
+            if(name){recur(response.body.info.next,name);}
                 else{recur(response.body.info.next);}
             }
         }

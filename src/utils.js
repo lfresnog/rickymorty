@@ -1,6 +1,8 @@
 import request from 'request';
 import chalk from 'chalk';
 
+const baseURL = 'https://rickandmortyapi.com/api/character/';
+
 const recur = function recur (url, name){ 
     request({ url: url, json: true }, (error, response) => {
         if(response.body.error){console.log(chalk.red(`What you are searching doesnt exist.`))}
@@ -19,7 +21,6 @@ const recur = function recur (url, name){
 }
 
 const list = function (argv){
-    const baseURL = 'https://rickandmortyapi.com/api/character/';
     if(!argv.search && !argv.status){
         if(!argv.npage){
             request({ url: baseURL, json: true }, (error, response) => {
@@ -37,17 +38,17 @@ const list = function (argv){
         }
     }
     if(!argv.search && !argv.npage && argv.status){
-            let URL = `https://rickandmortyapi.com/api/character/?status=${argv.status}`;
+            let URL = `${baseURL}?status=${argv.status}`;
             recur(URL);
     }
     if(!argv.status && !argv.napage && argv.search){
-        let URL = `https://rickandmortyapi.com/api/character/?name=${argv.search}`;
+        let URL = `${baseURL}?name=${argv.search}`;
         recur(URL,argv.search);
     }
 }
 
 const view = function view(argv){
-        let URL = `https://rickandmortyapi.com/api/character/${argv.id}`;
+        let URL = `${baseURL}${argv.id}`;
         request({ url: URL, json: true }, (error, response) => {
             console.log(`${chalk.yellow(`Name: `)}${response.body.name}\n${chalk.yellow(`Status: `)}${response.body.status}\n${chalk.yellow(`Specie: `)}${response.body.species}\n${chalk.yellow(`Origin: `)}${response.body.origin.name}\n${chalk.yellow(`Location: `)}${response.body.location.name}`);
         });
